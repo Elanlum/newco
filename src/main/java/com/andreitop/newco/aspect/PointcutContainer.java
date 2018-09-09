@@ -7,4 +7,12 @@ public class PointcutContainer {
     @Pointcut("execution( * com.andreitop.newco.repository.*Repo*.find*())")
     public void repositoryFind() {
     }
+
+    @Pointcut("execution(* com.andreitop.newco.repository.*Repo*.*save*())")
+    public void repositorySave() {
+    }
+
+    @Pointcut("execution (* com.andreitop.newco.repository.*Repo*.*delete*())")
+    public void repositoryDelete() {
+    }
 }
