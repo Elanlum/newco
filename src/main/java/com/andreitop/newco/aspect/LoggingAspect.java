@@ -24,18 +24,18 @@ public class LoggingAspect {
         logger.info(" ---> Method " + className + "." + methodName + " is about to be called");
     }
 
-    @AfterReturning("com.andreitop.newco.aspect.PointcutContainer.repositorySave()")
-    public void afterReturningRepo(JoinPoint joinPoint) {
+    @AfterReturning(pointcut = "com.andreitop.newco.aspect.PointcutContainer.repositorySave()", returning = "returnValue")
+    public void afterReturningRepo(JoinPoint joinPoint, Object returnValue) {
         String className = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
-        logger.info("If method " + className + "." + methodName + " is called, class runs correctly and returns");
+        logger.info("If method " + className + "." + methodName + " is called, class runs correctly and returns" + returnValue);
     }
 
-    @AfterThrowing("com.andreitop.newco.aspect.PointcutContainer.repositoryDelete()")
-    public void afterThrowingRepo(JoinPoint joinPoint) {
+    @AfterThrowing(pointcut = "com.andreitop.newco.aspect.PointcutContainer.repositoryDelete()", throwing = "ex")
+    public void afterThrowingRepo(JoinPoint joinPoint, Throwable ex) {
         String className = joinPoint.getSignature().getDeclaringTypeName();
         String methodName = joinPoint.getSignature().getName();
         logger.info("---------> If method " + className + "." + methodName + " is called, class throws an exception");
-        System.out.println("---------> If method " + className + "." + methodName + " is called, class throws an exception");
+        System.out.println("---------> If method " + className + "." + methodName + " is called, class throws an exception" + ex);
     }
 }
